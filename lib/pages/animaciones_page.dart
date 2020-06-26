@@ -36,7 +36,20 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    return _Cuadrado();
+    controller.forward();
+    
+    return AnimatedBuilder(
+      animation: controller,
+      //  child: _Cuadrado(),
+      builder: (BuildContext context, Widget child) {
+        print(rotacion.value);
+        return Transform.rotate(
+          angle: rotacion.value,
+          child: _Cuadrado()
+          
+        );
+      },
+    );
   }
 }
 
