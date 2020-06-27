@@ -23,6 +23,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
   AnimationController controller;
   Animation<double> rotacion;
   Animation<double> opacidad;
+  Animation<double> opacidadOut;
   Animation<double> moverDerecha;
   Animation<double> agrandar;
 
@@ -35,7 +36,10 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
     opacidad = Tween(begin: 0.1, end: 1.0).animate(
       CurvedAnimation(parent: controller, curve: Interval(0.0, 0.3, curve: Curves.easeIn))
     );
-    moverDerecha = Tween(begin: 0.1, end: 300.0).animate(
+    opacidadOut = Tween(begin: 0.8, end: 0.0).animate(
+      CurvedAnimation(parent: controller, curve: Interval(0.8, 1.0))
+    );
+    moverDerecha = Tween(begin: 0.1, end: 200.0).animate(
       CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn)
     );
     agrandar = Tween(begin: 0.0, end: 2.0).animate(
@@ -70,18 +74,21 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
         child: _Cuadrado(),
       builder: (BuildContext context, Widget childCuadrado) {
         // print(rotacion.value);
-        return Transform.translate(
-          offset: Offset(moverDerecha.value, 0),
-          child: Transform.rotate(
-            angle: rotacion.value,
-            child: Opacity(
-              opacity: opacidad.value,
-              child: Transform.scale(
-                scale: agrandar.value,
-                child: childCuadrado
-              ),
-            )
-            
+        return Opacity(
+          opacity: opacidadOut.value,
+          child: Transform.translate(
+            offset: Offset(moverDerecha.value, 0),
+            child: Transform.rotate(
+              angle: rotacion.value,
+              child: Opacity(
+                opacity: opacidad.value,
+                child: Transform.scale(
+                  scale: agrandar.value,
+                  child: childCuadrado
+                ),
+              )
+              
+            ),
           ),
         );
       },
