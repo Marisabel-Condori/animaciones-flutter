@@ -70,8 +70,8 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
     controller.forward();
     
     return AnimatedBuilder(
-       animation: controller,
-        child: _Cuadrado(),
+      animation: controller,
+      child: _Cuadrado(),
       builder: (BuildContext context, Widget childCuadrado) {
         // print(rotacion.value);
         return Opacity(
