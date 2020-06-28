@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 
 class RadialProgressWidget extends StatefulWidget {
   final porcentaje;
+  final Color colorPrimario;
+  final Color colorSecundario;
 
-  RadialProgressWidget({this.porcentaje});
+  RadialProgressWidget({this.porcentaje, this.colorPrimario= Colors.orangeAccent, this.colorSecundario = Colors.grey});
 
   @override
   _RadialProgressWidgetState createState() => _RadialProgressWidgetState();
@@ -41,7 +43,9 @@ class _RadialProgressWidgetState extends State<RadialProgressWidget> with Single
           width: double.infinity,
           height: double.infinity,
           child: CustomPaint(
-            painter: _MiRadialProgress((widget.porcentaje - diferenciaAnimar) + (diferenciaAnimar*controller.value))
+            painter: _MiRadialProgress(
+            (widget.porcentaje - diferenciaAnimar) + (diferenciaAnimar*controller.value),
+            widget.colorPrimario, widget.colorSecundario)
           ),
         );
       },
@@ -51,12 +55,14 @@ class _RadialProgressWidgetState extends State<RadialProgressWidget> with Single
 
 class _MiRadialProgress extends CustomPainter{
   final porcentaje;
-  _MiRadialProgress(this.porcentaje);
+  final colorPrimario;
+  final colorSecundario;
+  _MiRadialProgress(this.porcentaje, this.colorPrimario, this.colorSecundario );
   @override
   void paint(Canvas canvas, Size size) {
       final paint = new Paint()
       ..strokeWidth = 5
-      ..color = Colors.black
+      ..color = colorSecundario
       ..style = PaintingStyle.stroke;
 
       Offset centro = Offset(size.width * 0.5, size.height/2);
@@ -66,7 +72,7 @@ class _MiRadialProgress extends CustomPainter{
       //arco
       final paintArco = new Paint()
       ..strokeWidth = 10
-      ..color = Colors.orangeAccent
+      ..color = colorPrimario
       ..style = PaintingStyle.stroke;
 
       double arcAngulo = 2*pi*(porcentaje /100);
