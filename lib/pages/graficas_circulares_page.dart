@@ -8,6 +8,7 @@ class GraficasCircularesPage extends StatefulWidget {
 }
 
 class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
+  
   double porcentaje = 0.0;
 
   @override
@@ -17,7 +18,7 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
          child: Container(
            width: 300.0,
            height: 300.0,
-           color: Colors.blue,
+          // color: Colors.blue,
            child: RadialProgressWidget(porcentaje: porcentaje,),
          ),
        ),
@@ -31,6 +32,7 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
             if (porcentaje >100.0) {
               porcentaje = 0.0;
             }
+         //   print('$porcentaje');
           });
         }),
     );

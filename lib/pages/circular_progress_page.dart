@@ -29,7 +29,6 @@ class _CircularProgressPageState extends State<CircularProgressPage> with Single
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
