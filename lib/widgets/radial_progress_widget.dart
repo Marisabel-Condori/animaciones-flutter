@@ -10,10 +10,11 @@ class RadialProgressWidget extends StatefulWidget {
 }
 
 class _RadialProgressWidgetState extends State<RadialProgressWidget> {
+
   @override
   Widget build(BuildContext context) {
     return Container(
-       child: Text('HOLA'),
+       child: Text('${widget.porcentaje}'),
     );
   }
 }
