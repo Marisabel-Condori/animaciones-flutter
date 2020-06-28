@@ -7,7 +7,7 @@ class RadialProgressWidget extends StatefulWidget {
   final Color colorPrimario;
   final Color colorSecundario;
 
-  RadialProgressWidget({this.porcentaje, this.colorPrimario= Colors.orangeAccent, this.colorSecundario = Colors.grey});
+  RadialProgressWidget({@required this.porcentaje, this.colorPrimario=Colors.orange, this.colorSecundario = Colors.grey});
 
   @override
   _RadialProgressWidgetState createState() => _RadialProgressWidgetState();
