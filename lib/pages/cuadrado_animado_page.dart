@@ -27,11 +27,21 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
   @override
   void initState() {
     controller = new AnimationController(vsync: this, duration: Duration(milliseconds: 4000));
-    moverDerecha = Tween(begin: 0.0, end: 150.0).animate(controller);
-    print(moverDerecha.value);
+    moverDerecha = Tween(begin: 0.0, end: 150.0).animate(
+      CurvedAnimation(parent: controller, curve: Interval(0.0, 0.25, curve: Curves.bounceOut))
+    );
+    moverArriba = Tween(begin: 0.0, end: -150.0).animate(
+      CurvedAnimation(parent: controller, curve: Interval(0.25, 0.5, curve: Curves.bounceOut))
+    );
+    moverIzquierda = Tween(begin: 0.0, end: 150.0).animate(
+      CurvedAnimation(parent: controller, curve: Interval(0.5, 0.75, curve: Curves.bounceOut))
+    );
+    moverAbajo = Tween(begin: 0.0, end: -150.0).animate(
+      CurvedAnimation(parent: controller, curve: Interval(0.75, 1.0, curve: Curves.bounceOut))
+    );
+    
 
     super.initState();
-    
   }
 
   @override
@@ -43,13 +53,15 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     controller.forward();
+    
     return AnimatedBuilder(
         animation: controller,
         child: _Cuadrado(),
         builder: (BuildContext context, Widget child) {
-          return Transform.translate(
+        //  print(moverDerecha.value);
+          return Transform.translate(  
             child: child,
-            offset: Offset(moverDerecha.value, 0)
+            offset: Offset(moverDerecha.value - moverIzquierda.value, moverArriba.value - moverAbajo.value )
           );
         }, 
     );
