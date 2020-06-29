@@ -6,7 +6,7 @@ class SlideShowPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SvgPicture.asset('assets/svg/s1'),
+      body: SvgPicture.asset('assets/svg/s1.svg'),
     );
   }
 }
