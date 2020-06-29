@@ -1,26 +1,31 @@
+import 'package:custom_painter/models/slide_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class SlideShowPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            Expanded(child: _Slides()),
-            _Dots()
-          ],
-        ),
-      )
-      //SvgPicture.asset('assets/svg/s1.svg'),
+    return ChangeNotifierProvider(
+      create: (context) => SlideModel(),
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            children: [
+              Expanded(child: _Slides()),
+              _Dots()
+            ],
+          ),
+        )
+        //SvgPicture.asset('assets/svg/s1.svg'),
+      ),
     );
   }
 }
 //*****************DOTS********************************//
 class _Dots extends StatelessWidget {
-
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,16 +43,18 @@ class _Dots extends StatelessWidget {
 }
 
 class _Dot extends StatelessWidget {
-  final int index;
+  final double index;
 
   _Dot(this.index);
   @override
   Widget build(BuildContext context) {
+    final nroP = Provider.of<SlideModel>(context);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5.0),
       height: 10.0, width: 10.0,
       decoration: BoxDecoration(
-        color: Colors.blue, shape: BoxShape.circle
+        color: (index == nroP.getNumPag)? Colors.blue: Colors.grey, 
+        shape: BoxShape.circle
       ),);
   }
 }
@@ -66,6 +73,7 @@ class __SlidesState extends State<_Slides> {
   void initState() {
     pageViewController.addListener((){
       print('numero de pagina ${pageViewController.page}');
+      Provider.of<SlideModel>(context, listen: false).setNumPag = pageViewController.page;
     });
     super.initState();
   }
