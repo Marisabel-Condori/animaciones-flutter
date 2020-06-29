@@ -49,11 +49,12 @@ class _Dot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final nroP = Provider.of<SlideModel>(context);
-    return Container(
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 200),
       margin: EdgeInsets.symmetric(horizontal: 5.0),
       height: 10.0, width: 10.0,
       decoration: BoxDecoration(
-        color: (index == nroP.getNumPag)? Colors.blue: Colors.grey, 
+        color: (nroP.getNumPag == index+0.5  && nroP.getNumPag == index-0.5 )? Colors.blue: Colors.grey, 
         shape: BoxShape.circle
       ),);
   }
