@@ -9,7 +9,9 @@ class SlideShowOptimiPage extends StatelessWidget {
     return Scaffold(
       body: SlideShowWidget(
         slides: [
-          SvgPicture.asset('assets/svg/s1.svg')
+          SvgPicture.asset('assets/svg/s1.svg'),
+          Text('holaaaaaaaaaaaaa'),
+          
         ],
       ),
     );
