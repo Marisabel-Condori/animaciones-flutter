@@ -54,9 +54,10 @@ class _Dot extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 5.0),
       height: 10.0, width: 10.0,
       decoration: BoxDecoration(
-        color: (nroP.getNumPag == index+0.5  && nroP.getNumPag == index-0.5 )? Colors.blue: Colors.grey, 
+        color: (nroP.getNumPag >= index-0.5  && nroP.getNumPag < index+0.5 )? Colors.blue: Colors.grey, 
         shape: BoxShape.circle
-      ),);
+      ),
+    );
   }
 }
 
@@ -73,7 +74,7 @@ class __SlidesState extends State<_Slides> {
   @override
   void initState() {
     pageViewController.addListener((){
-      print('numero de pagina ${pageViewController.page}');
+    //  print('numero de pagina ${pageViewController.page}');
       Provider.of<SlideModel>(context, listen: false).setNumPag = pageViewController.page;
     });
     super.initState();
