@@ -7,10 +7,13 @@ class SlideShowOptimiPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: SlideShowWidget(
+        puntosArriba: false,
         slides: [
           SvgPicture.asset('assets/svg/s1.svg'),
           Text('holaaaaaaaaaaaaa'),
+          Text('hfsdfsfdsfaaaa'),
           
         ],
       ),

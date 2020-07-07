@@ -6,8 +6,12 @@ import 'package:provider/provider.dart';
 class SlideShowWidget extends StatelessWidget {
   
   final List<Widget> slides;
+  final bool puntosArriba;
 
-  SlideShowWidget({ @required this.slides});
+  SlideShowWidget({
+    @required this.slides,
+    this.puntosArriba = true
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +20,9 @@ class SlideShowWidget extends StatelessWidget {
       child: Center(
           child: Column(
             children: [
+              if (puntosArriba) _Dots(this.slides.length) ,
               Expanded(child: _Slides(this.slides)),
-              _Dots(this.slides.length)
+              if (!puntosArriba) _Dots(this.slides.length) ,
             ],
           ),
         )
