@@ -7,10 +7,14 @@ class SlideShowWidget extends StatelessWidget {
   
   final List<Widget> slides;
   final bool puntosArriba;
+  final Color colorGeneral;
+  final Color colorSecundario;
 
   SlideShowWidget({
     @required this.slides,
-    this.puntosArriba = true
+    this.puntosArriba = true,
+    this.colorGeneral = Colors.grey,
+    this.colorSecundario = Colors.blue
   });
 
   @override
@@ -20,9 +24,9 @@ class SlideShowWidget extends StatelessWidget {
       child: Center(
           child: Column(
             children: [
-              if (puntosArriba) _Dots(this.slides.length) ,
+              if (puntosArriba) _Dots(this.slides.length, this.colorGeneral, this.colorSecundario) ,
               Expanded(child: _Slides(this.slides)),
-              if (!puntosArriba) _Dots(this.slides.length) ,
+              if (!puntosArriba) _Dots(this.slides.length, this.colorGeneral, this.colorSecundario) ,
             ],
           ),
         )
@@ -33,8 +37,10 @@ class SlideShowWidget extends StatelessWidget {
 //*****************DOTS********************************//
 class _Dots extends StatelessWidget {
   final int i;
+  final Color colorGen;
+  final Color colorSec;
 
-  _Dots(this.i);
+  _Dots(this.i, this.colorGen, this.colorSec);
   
   @override
   Widget build(BuildContext context) {
@@ -43,15 +49,17 @@ class _Dots extends StatelessWidget {
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(i, (index) => _Dot(index)),),
+        children: List.generate(i, (index) => _Dot(index, colorGen, colorSec)),),
     );
   }
 }
 
 class _Dot extends StatelessWidget {
   final int index;
+  final Color colorGen;
+  final Color colorSec;
 
-  _Dot(this.index);
+  _Dot(this.index, this.colorGen, this.colorSec);
   @override
   Widget build(BuildContext context) {
     final nroP = Provider.of<SlideModel>(context);
@@ -60,7 +68,7 @@ class _Dot extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 5.0),
       height: 10.0, width: 10.0,
       decoration: BoxDecoration(
-        color: (nroP.getNumPag >= index-0.5  && nroP.getNumPag < index+0.5 )? Colors.blue: Colors.grey, 
+        color: (nroP.getNumPag >= index-0.5  && nroP.getNumPag < index+0.5 )? colorSec: colorGen, 
         shape: BoxShape.circle
       ),
     );

@@ -10,6 +10,8 @@ class SlideShowOptimiPage extends StatelessWidget {
       
       body: SlideShowWidget(
         puntosArriba: false,
+        colorGeneral: Colors.green,
+        colorSecundario: Colors.red,
         slides: [
           SvgPicture.asset('assets/svg/s1.svg'),
           Text('holaaaaaaaaaaaaa'),
