@@ -173,24 +173,20 @@ class _SlideShowModel with ChangeNotifier{
   Color get getColorGeneral => this._colorGeneral;
   set setColorGeneral(Color colorGen){
     this._colorGeneral = colorGen;
-    notifyListeners();
   }
 
   Color get getColorSecundario => this._colorSecundario;
   set setColorSecundario(Color colorSec){
     this._colorSecundario = colorSec;
-    notifyListeners();
   }
 
   double get getTamPrin => this._tamanioPrincipal;
   set setTamPrin(double nro){
     this._tamanioPrincipal = nro;
-    notifyListeners();
   }
 
   double get getTamSec => this._tamanioSecundaio;
   set setTamSec(double nro){
     this._tamanioSecundaio = nro;
-    notifyListeners();
   }
 }
