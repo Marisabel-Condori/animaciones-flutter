@@ -1,7 +1,6 @@
-import 'package:custom_painter/models/slide_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:flutter_svg/svg.dart';
 
 class SlideShowWidget extends StatelessWidget {
   
@@ -20,27 +19,47 @@ class SlideShowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => SlideModel(),
+      create: (_) => _SlideShowModel(),
       child: Center(
-          child: Column(
-            children: [
-              if (puntosArriba) _Dots(this.slides.length, this.colorGeneral, this.colorSecundario) ,
-              Expanded(child: _Slides(this.slides)),
-              if (!puntosArriba) _Dots(this.slides.length, this.colorGeneral, this.colorSecundario) ,
-            ],
-          ),
+          child: Builder(
+            builder: (BuildContext context){
+              Provider.of<_SlideShowModel>(context).setColorGeneral = this.colorGeneral;
+              Provider.of<_SlideShowModel>(context).setColorSecundario = this.colorSecundario;
+              return _EstructuraPuntos(puntosArriba: puntosArriba, slides: slides);
+            }
+          )
         )
     );
   }
 }
 
-//*****************DOTS********************************//
+class _EstructuraPuntos extends StatelessWidget {
+  const _EstructuraPuntos({
+    Key key,
+    @required this.puntosArriba,
+    @required this.slides,
+  }) : super(key: key);
+
+  final bool puntosArriba;
+  final List<Widget> slides;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        if (puntosArriba) _Dots(this.slides.length) ,
+        Expanded(child: _Slides(this.slides)),
+        if (!puntosArriba) _Dots(this.slides.length) ,
+      ],
+    );
+  }
+}
+
+//**************************DOTS********************************//
 class _Dots extends StatelessWidget {
   final int i;
-  final Color colorGen;
-  final Color colorSec;
 
-  _Dots(this.i, this.colorGen, this.colorSec);
+  _Dots(this.i);
   
   @override
   Widget build(BuildContext context) {
@@ -49,26 +68,24 @@ class _Dots extends StatelessWidget {
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(i, (index) => _Dot(index, colorGen, colorSec)),),
+        children: List.generate(i, (index) => _Dot(index)),),
     );
   }
 }
 
 class _Dot extends StatelessWidget {
   final int index;
-  final Color colorGen;
-  final Color colorSec;
 
-  _Dot(this.index, this.colorGen, this.colorSec);
+  _Dot(this.index);
   @override
   Widget build(BuildContext context) {
-    final nroP = Provider.of<SlideModel>(context);
+    final nroP = Provider.of<_SlideShowModel>(context);
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
       margin: EdgeInsets.symmetric(horizontal: 5.0),
       height: 10.0, width: 10.0,
       decoration: BoxDecoration(
-        color: (nroP.getNumPag >= index-0.5  && nroP.getNumPag < index+0.5 )? colorSec: colorGen, 
+        color: (nroP.getNumPag >= index-0.5  && nroP.getNumPag < index+0.5 )? nroP.getColorSecundario: nroP.getColorGeneral, 
         shape: BoxShape.circle
       ),
     );
@@ -90,7 +107,7 @@ class __SlidesState extends State<_Slides> {
   @override
   void initState() {
     pageViewController.addListener((){
-      Provider.of<SlideModel>(context, listen: false).setNumPag = pageViewController.page;
+      Provider.of<_SlideShowModel>(context, listen: false).setNumPag = pageViewController.page;
     });
     super.initState();
   }
@@ -123,5 +140,32 @@ class _Slide extends StatelessWidget {
       width: double.infinity,
       child: slide
     );
+  }
+}
+//****************************************************/
+class _SlideShowModel with ChangeNotifier{
+  double _numPag = 0;
+  Color _colorGeneral = Colors.grey;
+  Color _colorSecundario = Colors. purple;
+
+  get getNumPag => this._numPag;
+
+  set setNumPag(double nro){
+    _numPag = nro;
+    notifyListeners();
+  }
+
+  get getColorGeneral => this._colorGeneral;
+
+  set setColorGeneral(Color colorGen){
+    _colorGeneral = colorGen;
+    notifyListeners();
+  }
+
+  get getColorSecundario => this._colorSecundario;
+
+  set setColorSecundario(Color colorSec){
+    _colorSecundario = colorSec;
+    notifyListeners();
   }
 }
