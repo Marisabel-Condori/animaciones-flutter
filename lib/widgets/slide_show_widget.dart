@@ -8,26 +8,36 @@ class SlideShowWidget extends StatelessWidget {
   final bool puntosArriba;
   final Color colorGeneral;
   final Color colorSecundario;
+  final double tamanioPrin;
+  final double tamanioSec;
 
   SlideShowWidget({
     @required this.slides,
     this.puntosArriba = true,
     this.colorGeneral = Colors.grey,
-    this.colorSecundario = Colors.blue
+    this.colorSecundario = Colors.blue,
+    this.tamanioPrin = 20.0,
+    this.tamanioSec = 15.0
   });
 
   @override
   Widget build(BuildContext context) {
+    
     return ChangeNotifierProvider(
       create: (_) => _SlideShowModel(),
+      
       child: Center(
           child: Builder(
             builder: (BuildContext context){
               Provider.of<_SlideShowModel>(context).setColorGeneral = this.colorGeneral;
               Provider.of<_SlideShowModel>(context).setColorSecundario = this.colorSecundario;
+
+              Provider.of<_SlideShowModel>(context).setTamPrin = this.tamanioPrin;
+              Provider.of<_SlideShowModel>(context).setTamSec = this.tamanioSec;
               return _EstructuraPuntos(puntosArriba: puntosArriba, slides: slides);
             }
           )
+        //  child: _EstructuraPuntos(puntosArriba: puntosArriba, slides: slides),
         )
     );
   }
@@ -83,9 +93,13 @@ class _Dot extends StatelessWidget {
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
       margin: EdgeInsets.symmetric(horizontal: 5.0),
-      height: 10.0, width: 10.0,
+      height: (nroP.getNumPag >= index-0.5  && nroP.getNumPag < index+0.5 )
+            ? nroP.getTamPrin: nroP.getTamSec, 
+      width: (nroP.getNumPag >= index-0.5  && nroP.getNumPag < index+0.5 )
+            ? nroP.getTamPrin: nroP.getTamSec,
       decoration: BoxDecoration(
-        color: (nroP.getNumPag >= index-0.5  && nroP.getNumPag < index+0.5 )? nroP.getColorSecundario: nroP.getColorGeneral, 
+        color: (nroP.getNumPag >= index-0.5  && nroP.getNumPag < index+0.5 )
+            ? nroP.getColorSecundario: nroP.getColorGeneral, 
         shape: BoxShape.circle
       ),
     );
@@ -142,30 +156,41 @@ class _Slide extends StatelessWidget {
     );
   }
 }
-//****************************************************/
+//********************* MODEL *******************************/
 class _SlideShowModel with ChangeNotifier{
-  double _numPag = 0;
+  double _numPag = 0.0;
   Color _colorGeneral = Colors.grey;
-  Color _colorSecundario = Colors. purple;
+  Color _colorSecundario = Colors.purple;
+  double _tamanioPrincipal = 20.0;
+  double _tamanioSecundaio  = 15.0;
 
-  get getNumPag => this._numPag;
-
+  double get getNumPag => this._numPag;
   set setNumPag(double nro){
-    _numPag = nro;
+    this._numPag = nro;
     notifyListeners();
   }
 
-  get getColorGeneral => this._colorGeneral;
-
+  Color get getColorGeneral => this._colorGeneral;
   set setColorGeneral(Color colorGen){
-    _colorGeneral = colorGen;
+    this._colorGeneral = colorGen;
     notifyListeners();
   }
 
-  get getColorSecundario => this._colorSecundario;
-
+  Color get getColorSecundario => this._colorSecundario;
   set setColorSecundario(Color colorSec){
-    _colorSecundario = colorSec;
+    this._colorSecundario = colorSec;
+    notifyListeners();
+  }
+
+  double get getTamPrin => this._tamanioPrincipal;
+  set setTamPrin(double nro){
+    this._tamanioPrincipal = nro;
+    notifyListeners();
+  }
+
+  double get getTamSec => this._tamanioSecundaio;
+  set setTamSec(double nro){
+    this._tamanioSecundaio = nro;
     notifyListeners();
   }
 }
