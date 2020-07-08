@@ -8,19 +8,35 @@ class SlideShowOptimiPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       
-      body: SlideShowWidget(
-        puntosArriba: false,
-        colorGeneral: Colors.brown,
-        colorSecundario: Colors.red,
-        tamanioPrin: 20.0,
-        tamanioSec: 10.0,
-        slides: [
-          SvgPicture.asset('assets/svg/s1.svg'),
-          Center(child: Text('holaaaaaaaaaaaaa')),
-          Center(child: Text('hfsdfsfdsfaaaa')),
-          
+      body: Column(
+        children: [
+          Expanded(child: MiSlideshow()),
+          Expanded(child: MiSlideshow()),
         ],
       ),
+    );
+  }
+}
+
+class MiSlideshow extends StatelessWidget {
+  const MiSlideshow({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideShowWidget(
+      puntosArriba: false,
+      colorGeneral: Colors.grey,
+      colorSecundario: Colors.purpleAccent,
+      tamanioPrin: 20.0,
+      tamanioSec: 10.0,
+      slides: [
+        SvgPicture.asset('assets/svg/s1.svg'),
+        Center(child: Text('holaaaaaaaaaaaaa')),
+        Center(child: Text('hfsdfsfdsfaaaa')),
+        
+      ],
     );
   }
 }
