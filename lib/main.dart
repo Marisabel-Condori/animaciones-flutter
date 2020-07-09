@@ -4,6 +4,7 @@
 // import 'package:custom_painter/pages/circular_progress_page.dart';
 // import 'package:custom_painter/pages/graficas_circulares_page.dart';
 //import 'package:custom_painter/labs/slideShow_page.dart';
+import 'package:custom_painter/pages/pinterest_page.dart';
 import 'package:custom_painter/pages/slide_show_optimizado_page.dart';
 import 'package:flutter/material.dart';
  
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       debugShowCheckedModeBanner: false,
-      home: SlideShowOptimiPage()
+      home: PinterestPage()
     );
   }
 }
