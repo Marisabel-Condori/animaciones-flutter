@@ -1,21 +1,25 @@
 import 'package:custom_painter/widgets/pinterest_menu_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
 
 class PinterestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     
-    return Scaffold(
-      body: Stack(
-        children: [
-          PinterestP(),
-          _PosicionMenu()
-        ],
-      )
-      //  PinterestMenuWidget()
-      //  PinterestP()
+    return ChangeNotifierProvider(
+      create: (_) => _MenuModel(),
+      child: Scaffold(
+        body: Stack(
+          children: [
+            PinterestP(),
+            _PosicionMenu()
+          ],
+        )
+        //  PinterestMenuWidget()
+        //  PinterestP()
+      ),
     );
   }
 }
@@ -25,13 +29,16 @@ class _PosicionMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final widthPantalla = MediaQuery.of(context).size.width;
+    final mostrar = Provider.of<_MenuModel>(context).getMostrar;
     return Positioned(
       bottom: 30.0,
       child: Container(
         height: 50.0,
         width: widthPantalla,
         child: Center(
-          child: PinterestMenuWidget(),
+          child: PinterestMenuWidget(
+            mostrar: mostrar,
+          ),
         ),
       )
     );
@@ -54,9 +61,11 @@ class _PinterestPState extends State<PinterestP> {
     controller.addListener(() {
     //  print(controller.offset);
       if (controller.offset > scrollAnterior) {
-        print('ocultar menu');
+      //  print('ocultar menu');
+        Provider.of<_MenuModel>(context, listen: false).setMostrar = false;
       }else{
-        print('mostrar menu');
+      //  print('mostrar menu');
+        Provider.of<_MenuModel>(context, listen: false).setMostrar = true;
       }
       scrollAnterior = controller.offset;
      });
@@ -104,5 +113,14 @@ class _PinterestItem extends StatelessWidget {
           ),
         )
       );
+  }
+}
+
+class _MenuModel with ChangeNotifier{
+  bool _mostrar = true;
+  bool get getMostrar => this._mostrar;
+  set setMostrar(bool valor){
+    this._mostrar = valor;
+    notifyListeners();
   }
 }
