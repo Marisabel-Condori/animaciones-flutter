@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PinterestBoton{
   @required final Function onPressed;
@@ -17,14 +18,17 @@ class PinterestMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: _PinterestMenuBackgroung( _MenuItems(items)),
+      child: ChangeNotifierProvider(
+        create: (_) => _MenuModel(),
+        child: _PinterestMenuBackgroung(child: _MenuItems(items))
+      ),
     );
   }
 }
 
 class _PinterestMenuBackgroung extends StatelessWidget {
   final Widget child;
-  _PinterestMenuBackgroung(this.child);
+  _PinterestMenuBackgroung({this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +74,28 @@ class _PinterestMenuBoton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final itemSeleccionado = Provider.of<_MenuModel>(context).getItemSelec;
     return GestureDetector(
-      onTap: item.onPressed,
+      onTap: (){
+        Provider.of<_MenuModel>(context, listen: false).setItemSelec = index;
+        item.onPressed();
+      },
       child: Container(
-        child: Icon(item.icon, color: Colors.cyan,),
-      ),
+        child: Icon(
+          item.icon, 
+          size: (itemSeleccionado == index)? 30: 20,
+          color: (itemSeleccionado == index)? Colors.black: Colors.cyan),
+        )
     );
+  }
+}
+
+class _MenuModel with ChangeNotifier{
+  int _itemSeleccionado=0;
+
+  int get getItemSelec => this._itemSeleccionado;
+  set setItemSelec(int nro){
+    this._itemSeleccionado = nro;
+    notifyListeners();
   }
 }
