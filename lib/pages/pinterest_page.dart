@@ -1,3 +1,4 @@
+import 'package:custom_painter/widgets/pinterest_menu_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -6,7 +7,8 @@ class PinterestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PinterestP()
+      body: PinterestMenuWidget()
+    //  PinterestP()
     );
   }
 }
