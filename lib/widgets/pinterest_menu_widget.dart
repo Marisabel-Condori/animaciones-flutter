@@ -17,22 +17,31 @@ class PinterestMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
+      child: _PinterestMenuBackgroung( _MenuItems(items)),
+    );
+  }
+}
 
-        child: _MenuItems(items),
-        width: 250.0,
-        height: 60.0,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(100.0),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black38,
-              blurRadius: 10,
-              spreadRadius: -5
-            )
-          ]
-        ),
+class _PinterestMenuBackgroung extends StatelessWidget {
+  final Widget child;
+  _PinterestMenuBackgroung(this.child);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: child,
+      width: 250.0,
+      height: 60.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(100.0),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black38,
+            blurRadius: 10,
+            spreadRadius: -5
+          )
+        ]
       ),
     );
   }
@@ -61,8 +70,11 @@ class _PinterestMenuBoton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Icon(item.icon),
+    return GestureDetector(
+      onTap: item.onPressed,
+      child: Container(
+        child: Icon(item.icon, color: Colors.cyan,),
+      ),
     );
   }
 }
