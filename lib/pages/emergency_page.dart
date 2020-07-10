@@ -11,7 +11,7 @@ class EmergencyPage extends StatelessWidget {
     return Scaffold(
       body: Center(child: BotonMenuWidget(
         icon: FontAwesomeIcons.carBattery,
-        onPress: (){},
+        onPress: (){print('click');},
         texto: 'holaaaaaaaaaaaaaaa',
        // color1: Color(0xff6989F5),
        // color2: Color(0xff906EF5),
@@ -23,9 +23,6 @@ class EmergencyPage extends StatelessWidget {
 }
 
 class _IconHeaderBackground extends StatelessWidget {
-  const _IconHeaderBackground({
-    Key key,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -17,21 +17,24 @@ class BotonMenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        _BotonBackground(colorA: this.color1, colorB: this.color2,icon: this.icon,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 100.0,width: 40.0,),
-            FaIcon(this.icon, color:Colors.white, size: 40.0),
-            SizedBox(width: 20.0,),
-            Expanded(child: Text(this.texto, style: TextStyle(color: Colors.white),)),  
-            FaIcon(FontAwesomeIcons.chevronRight,  color:Colors.white),
-            SizedBox(width: 40.0,),
-          ],
-        )
-      ],
+    return GestureDetector(
+      onTap: this.onPress,
+      child: Stack(
+        children: [
+          _BotonBackground(colorA: this.color1, colorB: this.color2,icon: this.icon,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 100.0,width: 40.0,),
+              FaIcon(this.icon, color:Colors.white, size: 40.0),
+              SizedBox(width: 20.0,),
+              Expanded(child: Text(this.texto, style: TextStyle(color: Colors.white),)),  
+              FaIcon(FontAwesomeIcons.chevronRight,  color:Colors.white),
+              SizedBox(width: 40.0,),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
