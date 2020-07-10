@@ -240,3 +240,27 @@ class _HeaderWavePainter extends CustomPainter {
   @override
   bool shouldRepaint(_HeaderWavePainter oldDelegate) => true;
 }
+
+//******************** ICON HEADER  *********************/
+//************************* lo usamos en emergency layout ****************************** */
+class IconHeader extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 250.0,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.red,
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(70.0)),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color>[
+            Color(0xff526BF6),
+            Color(0xff62ACF2),
+          ])
+      ),
+    );
+  }
+}
