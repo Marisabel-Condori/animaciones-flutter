@@ -2,19 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BotonMenuWidget extends StatelessWidget {
+  final IconData icon;
+  final String texto;
+  final Color color1;
+  final Color color2;
+  final Function onPress;
+
+  const BotonMenuWidget({
+    @required this.icon, 
+    @required this.texto, 
+    this.color1 = Colors.purple, 
+    this.color2 = Colors.orange, 
+    @required this.onPress});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        _BotonBackground(),
+        _BotonBackground(colorA: this.color1, colorB: this.color2,icon: this.icon,),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 100.0,width: 40.0,),
-            FaIcon(FontAwesomeIcons.carCrash, color:Colors.white, size: 40.0),
+            FaIcon(this.icon, color:Colors.white, size: 40.0),
             SizedBox(width: 20.0,),
-            Expanded(child: Text('Motor Accident', style: TextStyle(color: Colors.white),)),  
+            Expanded(child: Text(this.texto, style: TextStyle(color: Colors.white),)),  
             FaIcon(FontAwesomeIcons.chevronRight,  color:Colors.white),
             SizedBox(width: 40.0,),
           ],
@@ -25,6 +37,12 @@ class BotonMenuWidget extends StatelessWidget {
 }
 
 class _BotonBackground extends StatelessWidget {
+  final Color colorA;
+  final Color colorB;
+  final IconData icon;
+
+  const _BotonBackground({
+    @required this.colorA, @required this.colorB, @required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +54,7 @@ class _BotonBackground extends StatelessWidget {
             Positioned(
               top: -20.0,
               right: -20.0,
-              child: FaIcon(FontAwesomeIcons.carCrash, color: Colors.white.withOpacity(0.2),size: 100.0,)
+              child: FaIcon(this.icon, color: Colors.white.withOpacity(0.2),size: 100.0,)
             )
           ],
         ),
@@ -51,8 +69,8 @@ class _BotonBackground extends StatelessWidget {
         ],
         gradient: LinearGradient(
           colors: <Color>[
-            Color(0xff6989F5),
-            Color(0xff906EF5)
+            this.colorA,
+            this.colorB
           ])
       ),
     );

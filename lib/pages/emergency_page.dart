@@ -9,8 +9,14 @@ class EmergencyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
-      body: Center(child: BotonMenuWidget())
+      body: Center(child: BotonMenuWidget(
+        icon: FontAwesomeIcons.carBattery,
+        onPress: (){},
+        texto: 'holaaaaaaaaaaaaaaa',
+       // color1: Color(0xff6989F5),
+       // color2: Color(0xff906EF5),
+
+      ))
       //_IconHeaderBackground(),
     );
   }
