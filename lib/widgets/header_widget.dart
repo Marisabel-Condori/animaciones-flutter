@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HeaderCuadradoWidget extends StatelessWidget {
 
@@ -242,8 +243,36 @@ class _HeaderWavePainter extends CustomPainter {
 }
 
 //******************** ICON HEADER  *********************/
-//************************* lo usamos en emergency layout ****************************** */
+//************************* lo usamos en emergency page ****************************** */
 class IconHeader extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    final Color colorBlanco = Colors.white.withOpacity(0.5);
+    return Stack(
+      children: [
+        _IconHeaderBackgroud(),
+        Positioned(
+          top: -60,
+          left: -40,
+          child: FaIcon(FontAwesomeIcons.plus, color: Colors.white.withOpacity(0.2), size: 200.0 ),  
+        ),
+        Column(
+          children: [
+            SizedBox(width: double.infinity,height: 100.0,),
+            Text('Haz solicitado', style: TextStyle(color:colorBlanco),),
+            SizedBox(height: 30.0,),
+            Text('Asistencia medica', style: TextStyle(color:colorBlanco, fontWeight: FontWeight.bold)),
+            SizedBox(height: 20.0,),
+            FaIcon(FontAwesomeIcons.plus, color: Colors.white, size: 50.0 ),
+          ],
+        )
+      ],
+    );
+  }
+}
+
+class _IconHeaderBackgroud extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
