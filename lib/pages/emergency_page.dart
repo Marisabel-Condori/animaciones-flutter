@@ -83,12 +83,34 @@ class _IconHeaderBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconHeader(
-      icon: FontAwesomeIcons.plus,
-      titulo: 'Asistencia medica',
-      subtitulo: 'Haz solicitado',
-      colorA: Color(0xFF526BF6),
-       colorB: Color(0xFF67ACF2),
+    return _Encabezado();
+  }
+}
+
+class _Encabezado extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        IconHeader(
+          icon: FontAwesomeIcons.plus,
+          titulo: 'Asistencia medica',
+          subtitulo: 'Haz solicitado',
+          colorA: Color(0xFF526BF6),
+           colorB: Color(0xFF67ACF2),
+        ),
+        Positioned(
+          right: 0.0,
+          top: 40.0,
+          child: RawMaterialButton(
+            onPressed: (){},
+            shape: CircleBorder(),
+            padding: EdgeInsets.all(15.0),
+            child: FaIcon(FontAwesomeIcons.ellipsisV, color: Colors.white,)
+          )
+        )
+      ],
     );
   }
 }
