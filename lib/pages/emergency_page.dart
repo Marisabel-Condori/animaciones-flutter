@@ -9,15 +9,38 @@ class EmergencyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: BotonMenuWidget(
-        icon: FontAwesomeIcons.carBattery,
-        onPress: (){print('click');},
-        texto: 'holaaaaaaaaaaaaaaa',
-       // color1: Color(0xff6989F5),
-       // color2: Color(0xff906EF5),
+      body: Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 150.0),
+            child: ListView(
+              children: [
+                SizedBox(height: 80.0,),
+                _BotonMenuWidgetTemp(),
+              ]
+            ),
+          ),
+          _IconHeaderBackground()
+        ],
+      )
+    );
+  }
+}
 
-      ))
-      //_IconHeaderBackground(),
+class _BotonMenuWidgetTemp extends StatelessWidget {
+  const _BotonMenuWidgetTemp({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BotonMenuWidget(
+      icon: FontAwesomeIcons.carBattery,
+      onPress: (){print('click');},
+      texto: 'holaaaaaaaaaaaaaaa',
+     // color1: Color(0xff6989F5),
+     // color2: Color(0xff906EF5),
+
     );
   }
 }
