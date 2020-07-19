@@ -9,6 +9,7 @@
 //import 'package:custom_painter/pages/emergency_page.dart';
 
 import 'package:custom_painter/pages/launcher_page.dart';
+import 'package:custom_painter/pages/launcher_tablet_page.dart';
 import 'package:custom_painter/pages/sliver_list_page.dart';
 import 'package:custom_painter/theme/themeChanger.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +32,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: OrientationBuilder(
         builder: (BuildContext context, Orientation orientation){
-          return Container(
-            child: LauncherPage()
-          );
+          final screenSize = MediaQuery.of(context).size;
+          if (screenSize.width > 500.0) {
+            return LauncherTabletPage();
+          } else {
+            return LauncherPage();
+          }
         })
     );
   }
