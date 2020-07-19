@@ -29,7 +29,12 @@ class MyApp extends StatelessWidget {
       theme: currentTheme,
       title: 'Material App',
       debugShowCheckedModeBanner: false,
-      home: LauncherPage()
+      home: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation){
+          return Container(
+            child: LauncherPage()
+          );
+        })
     );
   }
 }
