@@ -8,6 +8,7 @@
 // import 'package:custom_painter/pages/slide_show_optimizado_page.dart';
 //import 'package:custom_painter/pages/emergency_page.dart';
 
+import 'package:custom_painter/pages/launcher_page.dart';
 import 'package:custom_painter/pages/sliver_list_page.dart';
 import 'package:flutter/material.dart';
  
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       debugShowCheckedModeBanner: false,
-      home: SliverListPage()
+      home: LauncherPage()
     );
   }
 }
