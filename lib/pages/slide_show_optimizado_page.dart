@@ -1,6 +1,8 @@
+import 'package:custom_painter/theme/themeChanger.dart';
 import 'package:custom_painter/widgets/slide_show_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class SlideShowOptimiPage extends StatelessWidget {
 
@@ -25,10 +27,12 @@ class MiSlideshow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
+    final acentColor = appTheme.currentTheme.accentColor;
     return SlideShowWidget(
       puntosArriba: false,
       colorGeneral: Colors.grey,
-      colorSecundario: Colors.purpleAccent,
+      colorSecundario: (appTheme.getDarkTheme)? acentColor:Colors.purpleAccent,
       tamanioPrin: 20.0,
       tamanioSec: 10.0,
       slides: [
