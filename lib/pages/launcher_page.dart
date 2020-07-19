@@ -1,6 +1,8 @@
 import 'package:custom_painter/routes/routes.dart';
+import 'package:custom_painter/theme/themeChanger.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class LauncherPage extends StatelessWidget {
 
@@ -42,6 +44,7 @@ class _Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
     return Drawer(
       child: Container(
         child: Column(
@@ -59,16 +62,20 @@ class _Menu extends StatelessWidget {
               leading: Icon(Icons.lightbulb_outline, color: Colors.blue,),
               title: Text('Dark Mode'),
               trailing: Switch.adaptive(
-                value: true, 
-                onChanged: (value){}
+                value: appTheme.getDarkTheme, 
+                onChanged: (value) =>  appTheme.setDarkTheme = value
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.add_to_home_screen, color: Colors.blue,),
-              title: Text('Custom Theme'),
-              trailing: Switch.adaptive(
-                value: true, 
-                onChanged: (value){}
+            SafeArea(
+              bottom: true,
+              top: false, left: false, right: false,
+              child: ListTile(
+                leading: Icon(Icons.add_to_home_screen, color: Colors.blue,),
+                title: Text('Custom Theme'),
+                trailing: Switch.adaptive(
+                  value: appTheme.getCustomTheme, 
+                  onChanged: (value) => appTheme.setCustomTheme = value  
+                ),
               ),
             )
           ],
