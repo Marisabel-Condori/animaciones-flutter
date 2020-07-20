@@ -1,4 +1,5 @@
 import 'package:custom_painter/labs/slideShow_page.dart';
+import 'package:custom_painter/models/layout_model.dart';
 import 'package:custom_painter/routes/routes.dart';
 import 'package:custom_painter/theme/themeChanger.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class LauncherTabletPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context);
+    final layoutModel = Provider.of<LayoutModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('launcher tablet page'),
@@ -26,7 +28,7 @@ class LauncherTabletPage extends StatelessWidget {
              height: double.infinity,
              color: (appTheme.getDarkTheme) ? Colors.grey: appTheme.currentTheme.accentColor,
            ),
-           Expanded(child: SlideShowPage())
+           Expanded(child: layoutModel.currentPage)
         ],
       ),
       drawer: _Menu(),
@@ -46,7 +48,9 @@ class _ListaOpciones extends StatelessWidget {
         title: Text(pageRoutes[i].titulo),
         trailing: Icon(Icons.chevron_right, color: appTheme.accentColor),
         onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>pageRoutes[i].page));
+        //  Navigator.push(context, MaterialPageRoute(builder: (context)=>pageRoutes[i].page));
+          final layoutModel = Provider.of<LayoutModel>(context, listen: false);
+          layoutModel.currentPage = pageRoutes[i].page;
         },
       ), 
       separatorBuilder: (context, i) => Divider(
