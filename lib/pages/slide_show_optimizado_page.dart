@@ -8,14 +8,20 @@ class SlideShowOptimiPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLarge;
+    if(MediaQuery.of(context).size.height > 500){
+      isLarge = true;
+    }else{
+      isLarge = false;
+    }
+    final _children = [
+      Expanded(child: MiSlideshow()),
+      Expanded(child: MiSlideshow()),
+    ];
     return Scaffold(
-      
-      body: Column(
-        children: [
-          Expanded(child: MiSlideshow()),
-          Expanded(child: MiSlideshow()),
-        ],
-      ),
+      body: (isLarge) 
+        ? Column(children: _children)
+        : Row(children: _children,) 
     );
   }
 }
