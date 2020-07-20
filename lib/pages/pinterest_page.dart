@@ -28,17 +28,25 @@ class _PosicionMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final widthPantalla = MediaQuery.of(context).size.width;
+    double widthPantalla = MediaQuery.of(context).size.width;
     final mostrar = Provider.of<_MenuModel>(context).getMostrar;
+
+    if(widthPantalla > 500){
+      widthPantalla = widthPantalla - 300;
+    }
     return Positioned(
       bottom: 30.0,
       child: Container(
         height: 50.0,
         width: widthPantalla,
-        child: Center(
-          child: PinterestMenuWidget(
-            mostrar: mostrar,
-          ),
+        child: Row(
+          children: [
+            Spacer(),
+            PinterestMenuWidget(
+              mostrar: mostrar,
+            ),
+            Spacer()
+          ]
         ),
       )
     );
@@ -81,13 +89,19 @@ class _PinterestPState extends State<PinterestP> {
 
   @override
   Widget build(BuildContext context) {
+    int count;
+    if(MediaQuery.of(context).size.width > 500){
+      count = 3;
+    }else{
+      count = 2;
+    }
     return new StaggeredGridView.countBuilder(
       controller: controller,
-      crossAxisCount: 4,
+      crossAxisCount: count,
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) => _PinterestItem(index),
       staggeredTileBuilder: (int index) =>
-          new StaggeredTile.count(2, index.isEven ? 2 : 4),
+          new StaggeredTile.count(1, index.isEven ? 1 : 2),
       mainAxisSpacing: 4.0,
       crossAxisSpacing: 4.0,
     );
