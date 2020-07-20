@@ -1,3 +1,4 @@
+import 'package:custom_painter/labs/slideShow_page.dart';
 import 'package:custom_painter/routes/routes.dart';
 import 'package:custom_painter/theme/themeChanger.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,26 @@ class LauncherTabletPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('launcher tablet page'),
+        backgroundColor: appTheme.currentTheme.accentColor,
       ),
-      body: _ListaOpciones(),
+      body: Row(
+        children: [
+           Container(
+             width: 300.0, height: double.infinity,
+             child: _ListaOpciones(),
+           ),
+           Container(
+             width: 1.0,
+             height: double.infinity,
+             color: (appTheme.getDarkTheme) ? Colors.grey: appTheme.currentTheme.accentColor,
+           ),
+           Expanded(child: SlideShowPage())
+        ],
+      ),
       drawer: _Menu(),
     );
   }
